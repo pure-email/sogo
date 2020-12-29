@@ -4,7 +4,6 @@ services:
     build:
       context: .
       dockerfile: ./nginx/Dockerfile
-    container_name: sogo_nginx
     networks:
       - sogo_default
     ports:
@@ -17,23 +16,24 @@ services:
         source: sogo_data
         target: /usr/lib/GNUstep/SOGo/
     depends_on:
-      - sogo
+      - app
     logging:
       driver: "json-file"
       options:
         max-size: "100m"
 
-  sogo:
+  app:
     build:
       context: .
       dockerfile: ./sogo/Dockerfile
-    container_name: sogo_app
+    deploy:
+      replicas: $REPLICAS_APP
     command: ["/usr/sbin/sogod",
               "-WONoDetach", "YES",
               "-WOPidFile", "/var/lib/sogo/sogo.pid",
               "-WOLogFile", "/proc/1/fd/1",
               "-WOWorkersCount", "$WCOUNT",
-              "-WOPort", "0.0.0.0:20000"]
+              "-WOPort", "WOPORT"]
     networks:
       - sogo_default
     restart: unless-stopped
@@ -44,6 +44,8 @@ services:
       target: /usr/lib/GNUstep/SOGo/
     environment:
       - WCOUNT=${WCOUNT}
+      - WOPORT=${HOST}
+      - REPLICAS_APP=${REPLICAS_APP}
     depends_on:
       - memcache
     logging:
@@ -53,7 +55,6 @@ services:
 
   memcache:
     restart: unless-stopped
-    container_name: sogo_memcache
     image: memcached:latest
     networks:
       - sogo_default

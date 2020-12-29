@@ -15,13 +15,14 @@ Lot's of *ToDo's* here
 * SSL termination
 
 ### Environment variables (.env)
-* WCOUNT=10
-* HOST=0.0.0.0:20000
+* WCOUNT - number of workers per container
+* HOST - <ip>:<port> for sogo app (example 0.0.0.0:20000)
+* REPLICAS_APP - number of sogo_app containers to start
 
 ### ToDo
 * move Sogo sensitive config params to secrets/env file
-* configure logo replacements
 * URI path change possibility
+* Replace MD5 used while testing to more secure algorithm
 
 ### Tested
 * Authorization

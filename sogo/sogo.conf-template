@@ -16,18 +16,18 @@
    * **************************************************************************/
 
   /* Database configuration (mysql://, postgresql:// or oracle://) */
-  SOGoProfileURL = "mysql://<login>:<password>@192.168.255.254:3306/<dbname>/sogo_user_profile";
-  OCSFolderInfoURL = "mysql://<login>:<password>@192.168.255.254:3306/<dbname>/sogo_folder_info";
-  OCSSessionsFolderURL = "mysql://<login>:<password>@192.168.255.254:3306/<dbname>/sogo_sessions_folder";
+  SOGoProfileURL = "mysql://{dblogin}:{dbpassword}@{dbhost}:{dbport}/{dbname}/sogo_user_profile";
+  OCSFolderInfoURL = "mysql://{dblogin}:{dbpassword}@{dbhost}:{dbport}/{dbname}/sogo_folder_info";
+  OCSSessionsFolderURL = "mysql://{dblogin}:{dbpassword}@{dbhost}:{dbport}/{dbname}/sogo_sessions_folder";
 
   /* Mail */
   SOGoDraftsFolderName = Drafts;
   SOGoSentFolderName = Sent;
   SOGoTrashFolderName = Trash;
   SOGoJunkFolderName = Junk;
-  SOGoIMAPServer = "imap://192.168.255.254:143";
-  SOGoSieveServer = "sieve://192.168.255.254:4190";
-  SOGoSMTPServer = "smtp://192.168.255.254:2525";
+  SOGoIMAPServer = "imap://{imaphost}:143";
+  SOGoSieveServer = "sieve://{sievehost}:4190";
+  SOGoSMTPServer = "smtp://{smtphost}:2525";
   //SOGoMailDomain = acme.com;
   SOGoMailingMechanism = smtp;
   SOGoSMTPAuthenticationType = PLAIN;
@@ -49,7 +49,7 @@
       {
         type = sql;
         id = directory;
-        viewURL = "mysql://<login>:<password>@192.168.255.254:3306/<dbname>/sogo_view";
+        viewURL = "mysql://{dblogin}:{dbpassword}@{dbhost}:{dbport}/{dbname}/sogo_view";
         canAuthenticate = YES;
         isAddressBook = YES;
         userPasswordAlgorithm = md5;
@@ -57,7 +57,7 @@
   );
 
   /* Web Interface */
-  SOGoPageTitle = "Pure Email";
+  SOGoPageTitle = {pagetitle};
   //SOGoVacationEnabled = YES;
   SOGoForwardEnabled = YES;
   SOGoSieveScriptsEnabled = YES;
@@ -72,7 +72,7 @@
     PublicDAndTViewer,
     ConfidentialDAndTViewer
   );
-  SOGoSuperUsernames = (pretox@ingenuity.email, sogo2); // This is an array - keep the parens!
+  SOGoSuperUsernames = (none, sogo); // This is an array - keep the parens!
   SxVMemLimit = 384;
   //WOPidFile = "/var/run/sogo/sogo.pid";
   SOGoMemcachedHost = "memcache";

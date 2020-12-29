@@ -33,7 +33,7 @@ services:
               "-WOPidFile", "/var/lib/sogo/sogo.pid",
               "-WOLogFile", "/proc/1/fd/1",
               "-WOWorkersCount", "$WCOUNT",
-              "-WOPort", "WOPORT"]
+              "-WOPort", "$WOPORT",]
     networks:
       - sogo_default
     restart: unless-stopped
@@ -44,7 +44,7 @@ services:
       target: /usr/lib/GNUstep/SOGo/
     environment:
       - WCOUNT=${WCOUNT}
-      - WOPORT=${HOST}
+      - WOPORT=${WOPORT}
       - REPLICAS_APP=${REPLICAS_APP}
     depends_on:
       - memcache

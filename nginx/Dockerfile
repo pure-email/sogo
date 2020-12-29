@@ -1,6 +1,6 @@
 FROM alpine:3.11
 
-LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
+LABEL maintainer="Pure-Email"
 
 ENV NGINX_VERSION 1.18.0
 ENV NJS_VERSION   0.4.2
@@ -104,6 +104,8 @@ RUN set -x \
 # forward request and error logs to docker log collector
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log \
+    && ln -sf /dev/stdout /var/log/activesync.log \
+    && ln -sf /dev/stderr /var/log/activesync-error.log \
 # create directory for ssl certs
     && mkdir /ssl \
     && rm -rf /etc/nginx/conf.d/default.conf

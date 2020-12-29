@@ -16,7 +16,7 @@ Lot's of *ToDo's* here
 
 ### Environment variables (.env)
 * WCOUNT - number of workers per container
-* HOST - <ip>:<port> for sogo app (example 0.0.0.0:20000)
+* WOPORT - <ip>:<port> for sogo app (example 0.0.0.0:20000)
 * REPLICAS_APP - number of sogo_app containers to start
 
 ### ToDo

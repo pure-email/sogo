@@ -1,0 +1,65 @@
+version: '3.8'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    container_name: sogo_nginx
+    networks:
+      - sogo_default
+    ports:
+      - 80:80
+    restart: unless-stopped
+    volumes:
+      - ./nginx/sogo.conf:/etc/nginx/conf.d/sogo.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - type: volume
+        source: sogo_data
+        target: /usr/lib/GNUstep/SOGo/
+    depends_on:
+      - sogo
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+
+  sogo:
+    build:
+      context: .
+      dockerfile: ./sogo/Dockerfile
+    container_name: sogo_app
+    command: ["/usr/sbin/sogod",
+              "-WONoDetach", "YES",
+              "-WOPidFile", "/var/lib/sogo/sogo.pid",
+              "-WOLogFile", "/proc/1/fd/1",
+              "-WOWorkersCount", "$WCOUNT",
+              "-WOPort", "0.0.0.0:20000"]
+    networks:
+      - sogo_default
+    restart: unless-stopped
+    volumes:
+    - ./sogo/sogo.conf:/etc/sogo/sogo.conf
+    - type: volume
+      source: sogo_data
+      target: /usr/lib/GNUstep/SOGo/
+    environment:
+      - WCOUNT=${WCOUNT}
+    depends_on:
+      - memcache
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+
+  memcache:
+    restart: unless-stopped
+    container_name: sogo_memcache
+    image: memcached:latest
+    networks:
+      - sogo_default
+
+networks:
+  sogo_default:
+
+volumes:
+  sogo_data:

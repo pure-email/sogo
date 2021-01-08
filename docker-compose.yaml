@@ -15,6 +15,7 @@ services:
       - type: volume
         source: sogo_data
         target: /usr/lib/GNUstep/SOGo/
+      - ./sogo/branding/pe-full.svg:/usr/lib/GNUstep/SOGo/WebServerResources/img/pe-full.svg
     depends_on:
       - app
     logging:

@@ -185,11 +185,11 @@ CREATE TABLE `sogo_user_profile` (
 --
 
 CREATE TABLE `sogo_view` (
-  `c_uid` varchar(10) NOT NULL,
-  `c_name` varchar(10) DEFAULT NULL,
-  `c_password` varchar(32) DEFAULT NULL,
+  `c_uid` varchar(255) NOT NULL,
+  `c_name` varchar(255) DEFAULT NULL,
+  `c_password` varchar(128) DEFAULT NULL,
   `c_cn` varchar(128) DEFAULT NULL,
-  `mail` varchar(128) DEFAULT NULL
+  `mail` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

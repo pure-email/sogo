@@ -1,0 +1,9 @@
+.md-default-theme.md-accent.md-bg {
+    background-color: rgb(77, 128, 128) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+md-input-container.md-default-theme .md-input, md-input-container .md-input {
+    color: white;
+    border-color: rgba(0,0,0,0.12);
+}

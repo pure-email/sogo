@@ -10,12 +10,11 @@ services:
       - 80:80
     restart: unless-stopped
     volumes:
-      - ./nginx/sogo.conf:/etc/nginx/conf.d/sogo.conf
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - type: volume
         source: sogo_data
         target: /usr/lib/GNUstep/SOGo/
-      - ./sogo/branding/pe-full.svg:/usr/lib/GNUstep/SOGo/WebServerResources/img/pe-full.svg
+      - ./nginx/sogo.conf:/etc/nginx/conf.d/sogo.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - app
     logging:
@@ -29,17 +28,18 @@ services:
       dockerfile: ./sogo/Dockerfile
     deploy:
       replicas: $REPLICAS_APP
-    command: ["/usr/sbin/sogod",
-              "-WONoDetach", "YES",
-              "-WOPidFile", "/var/lib/sogo/sogo.pid",
-              "-WOLogFile", "/proc/1/fd/1",
-              "-WOWorkersCount", "$WCOUNT",
-              "-WOPort", "$WOPORT",]
+    command: bash -c "
+              /usr/sbin/sogod
+              -WONoDetach YES
+              -WOPidFile /var/lib/sogo/sogo.pid
+              -WOLogFile /proc/1/fd/1
+              -WOWorkersCount $WCOUNT
+              -WOPort $WOPORT
+      "
     networks:
       - sogo_default
     restart: unless-stopped
     volumes:
-    - ./sogo/sogo.conf:/etc/sogo/sogo.conf
     - type: volume
       source: sogo_data
       target: /usr/lib/GNUstep/SOGo/
@@ -65,3 +65,4 @@ networks:
 
 volumes:
   sogo_data:
+    name: sogo_app_data

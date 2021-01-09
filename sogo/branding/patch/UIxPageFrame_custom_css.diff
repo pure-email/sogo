@@ -1,0 +1,10 @@
+--- UIxPageFrame.wox	2020-12-05 09:24:15.000000000 +0200
++++ UIxPageFrame_new.wox	2021-01-09 11:28:40.774274800 +0200
+@@ -26,6 +26,7 @@
+           <link type="text/css" rel="stylesheet" rsrc:href="css/theme-default.css" />
+         </var:if>
+         <link type="text/css" rel="stylesheet" rsrc:href="css/styles.css" />
++        <link href="/static/css/custom.css" rel="stylesheet" type="text/css" />
+         <var:if condition="hasPageSpecificCSS">
+           <link type="text/css" rel="stylesheet" var:href="pageCSSURL"/>
+         </var:if>

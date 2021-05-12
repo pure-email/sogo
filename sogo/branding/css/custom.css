@@ -4,6 +4,6 @@
 }
 
 md-input-container.md-default-theme .md-input, md-input-container .md-input {
-    color: white;
+    /* color: white; */
     border-color: rgba(0,0,0,0.12);
 }

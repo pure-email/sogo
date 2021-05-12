@@ -41,7 +41,7 @@
   //SOGoFoldersSendEMailNotifications = NO;
 
   /* Authentication */
-  //SOGoPasswordChangeEnabled = YES;
+  SOGoPasswordChangeEnabled = YES;
 
 
   SOGoUserSources =

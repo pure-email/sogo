@@ -12,6 +12,9 @@ services:
     volumes:
       - ./nginx/sogo.conf:/etc/nginx/conf.d/sogo.conf
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - type: volume
+        source: sogo_data
+        target: /usr/lib/GNUstep/SOGo/
     depends_on:
       - app
     environment:
@@ -46,6 +49,9 @@ services:
       - memcache
     volumes:
       - ./sogo/sogo.conf:/etc/sogo/sogo.conf
+      - type: volume
+        source: sogo_data
+        target: /usr/lib/GNUstep/SOGo/
     logging:
       driver: "json-file"
       options:

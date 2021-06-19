@@ -44,6 +44,8 @@ services:
       - REPLICAS_APP=${REPLICAS_APP}
     depends_on:
       - memcache
+    volumes:
+      - ./sogo/sogo.conf:/etc/sogo/sogo.conf
     logging:
       driver: "json-file"
       options:
